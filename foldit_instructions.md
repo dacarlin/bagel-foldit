@@ -1,18 +1,22 @@
 # Instructions for designing mutations to BglB using the protein editor Foldit Standalone
 
-This repository contains a macromolecular model of BglB based on the crystal structure 2JIE that is used for design efforts in the Siegel group's Bagel project. Read on to learn how to use Foldit for enzyme design.
+**Update 22 Feb 2017**: changed instructions to use [Foldit Standalone](http://fold.it/dist/internal/build/).   
 
 ## Loading and saving structures
 
 To load your protein:
 
-"Load FASTA/PDB" > opens a file selection window
+"Load FASTA/PDB" from the first screen opens a file selection window, select all 5 files:
 
-You must select the BglB PDB file (bglb.pdb), along with the two params files for the pNPG molecule (pNPG.params and pNPG.conf.pdb), and the chemical restraits that tell Foldit to keep the pNPG in a catalytically-relevant conformation.
+- `bglb.pdb`
+- `pNPG.params`
+- `pNPG.conf.pdb`
+- `BglB-pNPG.cnstr`
+- `BglB-pNPG.puzzle_setup`
 
-To save a PDB file: `Ctrl-Alt-Shift-S`
+and choose "Open" to load the BglB-pNPG model into Foldit Standalone. Within Foldit, `Ctrl-Alt-Shift-A` to load in a structure.
 
-Many Foldit shortcuts are prefixed with `Ctrl-Alt-Shift`.
+To save a PDB file (XYZ coordinates): `Ctrl-Alt-Shift-S`.
 
 ## Recommended view options
 
@@ -22,19 +26,19 @@ Many Foldit shortcuts are prefixed with `Ctrl-Alt-Shift`.
 
 ## Inspect individual residue energies
 
-Mouse over residue so it is highlighted and hit Tab.
+Mouse over residue so it is highlighted and hit `Tab`.
 
 This info panel gives a breakdown of the various score terms for the selected residue. Importance of score is in order as it appears in the menu
 
 ## Viewing operations
 
-+ Zoom to Area of Interest: Mouse over residue of interest so it is highlighted;  hit Shift-Q  (no click) I often move around until I see the ligand and then do this
++ Zoom to Area of Interest: Mouse over residue of interest so it is highlighted;  hit `Shift-Q`  (no click) I often move around until I see the ligand and then do this
 
-+ BackShading:  Ctrl-Shift-Click (on black backdrop) and drag
++ BackShading:  `Ctrl-Shift-Click` (on black backdrop) and drag
 
-+ Front Clipping:  Ctrl-Alt-Click (on black backdrop) and drag
++ Front Clipping:  `Ctrl-Alt-Click` (on black backdrop) and drag
 
-+ Measuring:  Mouse over atom1 of interest, hit Ctrl-Alt-Shift-C (no click), repeat for atom 2 (reports distance), atom 3 (angle), and atom 4 (dihedral)
++ Measuring:  Mouse over atom1 of interest, hit `Ctrl-Alt-Shift-C` (no click), repeat for atom 2 (reports distance), atom 3 (angle), and atom 4 (dihedral)
 
 ## Selection operations
 
@@ -44,21 +48,21 @@ This info panel gives a breakdown of the various score terms for the selected re
 
 ## Using the Lua terminal  
 
-+ Main --> Script Terminal
-+ Select specific residue:  selection.Select(<res#>)
-+ Zoom to specific residue:  ui.CenterViewport(<res#>)
++ From main options, select "Script Terminal"
++ Select specific residue: `selection.Select(i)`, where `i` is the residue index
++ Zoom to specific residue: `ui.CenterViewport(i)`
 
 ## How to design mutants in Foldit
 
-+ Click residue and hit mutate (m) to see options for new residues
++ Click residue and hit mutate (`m`) to see options for new residues
 + Selecting a subset of residues (lower right boxes) can be used to do directed designs
-+ Selection will be used in both mutate AND shake (i.e. shake now mutates those residues while everything else stays native).
-+ **Never** wiggle (w) without selecting a sub-selection!
++ Selection will be used in both mutate and shake (i.e. shake now mutates those residues while everything else stays native).
++ **Never** wiggle (`w`) without selecting a sub-selection
 + Sometimes high energies (mutations/conformations) are need to get to the low energy
 + Native amino acid or close to native amino acid is generally better
-+ Manually force the interaction you want and then side-chain wiggle (E) those residues and the ones around it
-+ General order of operations:  E --> S --> E
-+ If score is not dropping faster than 0.05/s you are likely at an energy minimum. This is true **only for** wiggling (w/e).  If you are shaking (s) pay attention to the number of cycles on the upper left corner.  Often the low energy is found after 5-10 cycles (cycles is the number in the parenthesis after the timer).
++ Manually force the interaction you want and then side-chain wiggle (`E`) those residues and the ones around it
++ General order of operations:  `E` → `S` → `E`
++ If score is not dropping faster than 0.05/s you are likely at an energy minimum. This is true **only for** wiggling (`w`/`e`).  If you are shaking (`s`) pay attention to the number of cycles on the upper left corner.  Often the low energy is found after 5-10 cycles (cycles is the number in the parentheses after the timer).
 
 ## How to choose mutants
 
